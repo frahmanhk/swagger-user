@@ -1,0 +1,6 @@
+id,uName,fName,lName,email,password,phone,uStatus
+4301,JohnyJose,AutoOne,Tester,autoone@gmail.com,password1,200000100,1
+4302,ChutiePie,AutoTwo,Tester,autotwo@yahoo.com,password2,200000200,2
+4303,JackCrack,AutoThree,Tester,autothree@abc.com,password3,200000300,3
+4304,MaxMouse,AutoFour,Tester,autofour@gmail.com,password4,200000400,4
+4305,ZeroBall,AutoFive,Tester,autofive@aut.com,password5,200000500,5

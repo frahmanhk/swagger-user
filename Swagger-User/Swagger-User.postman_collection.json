@@ -1,0 +1,332 @@
+{
+	"info": {
+		"_postman_id": "9d3b1c9d-5495-4e67-8226-02375e98e48c",
+		"name": "Swagger-User",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Create_User_Detail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//'JSON String or Body' to 'JSON Object'\r",
+							"var jsonObject = JSON.parse(responseBody); \r",
+							"\r",
+							"//Test to read the response value and validate with the expected result \r",
+							"tests[\"Code is 200\"] = (jsonObject.code === 200)\r",
+							"tests[\"Type is unknown\"] = (jsonObject.type === \"unknown\")\r",
+							"tests[\"Message is ID\"] = (jsonObject.message === pm.environment.get(\"id\"));\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"const moment = require('moment');\r",
+							"pm.environment.set(\"id\", moment().format(\"HHMMSSS\"));\r",
+							"pm.environment.set(\"uName\", \"Test\" + moment().format(\"HHMMSSS\"));\r",
+							"pm.environment.set(\"fName\", \"Auto\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": {{id}},\r\n    \"username\": \"{{uName}}\",\r\n    \"firstName\": \"{{fName}}\",\r\n    \"lastName\": \"{{lName}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"userStatus\": {{uStatus}}\r\n}"
+				},
+				"url": {
+					"raw": "{{swagger_url}}/user",
+					"host": [
+						"{{swagger_url}}"
+					],
+					"path": [
+						"user"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Created_User_Detail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//'JSON String or Body' to 'JSON Object'\r",
+							"let jsonObject = JSON.parse(responseBody); \r",
+							"\r",
+							"//Test to read the response value and validate with the expected result \r",
+							"//To convert string to integer = use + sign\r",
+							"tests[\"id check\"] = (jsonObject.id === +pm.environment.get(\"id\"));\r",
+							"tests[\"username check\"] = (jsonObject.username === pm.environment.get(\"uName\"));\r",
+							"tests[\"firstName check\"] = (jsonObject.firstName === pm.environment.get(\"fName\"));\r",
+							"tests[\"lastName check\"] = (jsonObject.lastName === pm.environment.get(\"lName\"));\r",
+							"tests[\"email check\"] = (jsonObject.email === pm.environment.get(\"email\"));\r",
+							"tests[\"password check\"] = (jsonObject.password === pm.environment.get(\"password\"));\r",
+							"tests[\"phone check\"] = (jsonObject.phone === pm.environment.get(\"phone\"));\r",
+							"tests[\"userStatus check\"] = (jsonObject.userStatus === +pm.environment.get(\"uStatus\"));\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{swagger_url}}/user/{{uName}}",
+					"host": [
+						"{{swagger_url}}"
+					],
+					"path": [
+						"user",
+						"{{uName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update_User_Detail",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"pm.environment.set(\"fName\", \"New\" + pm.environment.get(\"fName\"));"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//'JSON String or Body' to 'JSON Object'\r",
+							"var jsonObject = JSON.parse(responseBody); \r",
+							"\r",
+							"//Test to read the response value and validate with the expected result \r",
+							"tests[\"Code is 200\"] = (jsonObject.code === 200)\r",
+							"tests[\"Type is unknown\"] = (jsonObject.type === \"unknown\")\r",
+							"tests[\"Message is ID\"] = (jsonObject.message === pm.environment.get(\"id\"));\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": {{id}},\r\n    \"username\": \"{{uName}}\",\r\n    \"firstName\": \"{{fName}}\",\r\n    \"lastName\": \"{{lName}}\",\r\n    \"email\": \"{{email}}\",\r\n    \"password\": \"{{password}}\",\r\n    \"phone\": \"{{phone}}\",\r\n    \"userStatus\": {{uStatus}}\r\n}"
+				},
+				"url": {
+					"raw": "{{swagger_url}}/user/{{uName}}",
+					"host": [
+						"{{swagger_url}}"
+					],
+					"path": [
+						"user",
+						"{{uName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_Updated_User_Detail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//'JSON String or Body' to 'JSON Object'\r",
+							"let jsonObject = JSON.parse(responseBody); \r",
+							"\r",
+							"//Test to read the response value and validate with the expected result \r",
+							"//To convert string to integer = use + sign\r",
+							"tests[\"id check\"] = (jsonObject.id === +pm.environment.get(\"id\"));\r",
+							"tests[\"username check\"] = (jsonObject.username === pm.environment.get(\"uName\"));\r",
+							"tests[\"firstName check\"] = (jsonObject.firstName === pm.environment.get(\"fName\"));\r",
+							"tests[\"lastName check\"] = (jsonObject.lastName === pm.environment.get(\"lName\"));\r",
+							"tests[\"email check\"] = (jsonObject.email === pm.environment.get(\"email\"));\r",
+							"tests[\"password check\"] = (jsonObject.password === pm.environment.get(\"password\"));\r",
+							"tests[\"phone check\"] = (jsonObject.phone === pm.environment.get(\"phone\"));\r",
+							"tests[\"userStatus check\"] = (jsonObject.userStatus === +pm.environment.get(\"uStatus\"));\r",
+							"\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{swagger_url}}/user/{{uName}}",
+					"host": [
+						"{{swagger_url}}"
+					],
+					"path": [
+						"user",
+						"{{uName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete_User_Detail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//'JSON String or Body' to 'JSON Object'\r",
+							"var jsonObject = JSON.parse(responseBody); \r",
+							"\r",
+							"//Test to read the response value and validate with the expected result \r",
+							"tests[\"Code is 200\"] = (jsonObject.code === 200)\r",
+							"tests[\"Type is unknown\"] = (jsonObject.type === \"unknown\")\r",
+							"tests[\"Message is USERNAME\"] = (jsonObject.message === pm.environment.get(\"uName\"));"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"id\": 2,\r\n    \"username\": \"UName2\",\r\n    \"firstName\": \"FName2\",\r\n    \"lastName\": \"LName2\",\r\n    \"email\": \"abc.def2@gmail.com\",\r\n    \"password\": \"password2\",\r\n    \"phone\": \"0400000002\",\r\n    \"userStatus\": 0\r\n  }\r\n]"
+				},
+				"url": {
+					"raw": "{{swagger_url}}/user/{{uName}}",
+					"host": [
+						"{{swagger_url}}"
+					],
+					"path": [
+						"user",
+						"{{uName}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get_User_NotFound",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"//'JSON String or Body' to 'JSON Object'\r",
+							"var jsonObject = JSON.parse(responseBody); \r",
+							"\r",
+							"//Test to read the response value and validate with the expected result \r",
+							"tests[\"Code is 1\"] = (jsonObject.code === 1)\r",
+							"tests[\"Type is error\"] = (jsonObject.type === \"error\")\r",
+							"tests[\"Message is 'User not found'\"] = (jsonObject.message === \"User not found\");"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n  {\r\n    \"id\": 2,\r\n    \"username\": \"UName2\",\r\n    \"firstName\": \"FName2\",\r\n    \"lastName\": \"LName2\",\r\n    \"email\": \"abc.def2@gmail.com\",\r\n    \"password\": \"password2\",\r\n    \"phone\": \"0400000002\",\r\n    \"userStatus\": 0\r\n  }\r\n]"
+				},
+				"url": {
+					"raw": "{{swagger_url}}/user/{{uName}}",
+					"host": [
+						"{{swagger_url}}"
+					],
+					"path": [
+						"user",
+						"{{uName}}"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

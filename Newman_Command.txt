@@ -1,0 +1,6 @@
+//Collection + Data + Environment + Report
+newman run Swagger-User_DataDriven.postman_collection.json -d userData.csv -e Env_User.postman_environment.json -r htmlextra --reporter-htmlextra-title "Swagger - User Project"
+
+//Collection + Environment + Report
+newman run Swagger-User.postman_collection.json -e Env_User.postman_environment.json -r htmlextra --reporter-htmlextra-title "Swagger - User Project"
+
